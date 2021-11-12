@@ -1,0 +1,135 @@
+[
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event2",
+    "date": "25/10/21",
+    "tickets_number": "10",
+    "in_archive": true,
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event3",
+    "date": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  },
+  {
+    "name": "event1",
+    "date_time": "25/10/21",
+    "tickets_number": 10,
+    "in_archive": false,
+    "location": "volgorechensk",
+    "picture": "",
+    "tickets": ""
+  }
+]

@@ -17,6 +17,9 @@ import ErrorText from '../../primitives/ErrorText';
 import Snackbar from '@mui/material/Snackbar/Snackbar';
 import { Alert } from '../Alert';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+
 const EMPTY_FORM = {
   email: '',
   password: ''
@@ -26,8 +29,7 @@ const ERRORS_DEFAULT_STATE = {
   mail: false,
   password: false,
   snackbar: false,
-  footer: false,
-  footerText: 'E-mail или пароль введены неверно.'
+  mailValidate: true
 };
 
 function emailValidation(email: string) {
@@ -41,7 +43,8 @@ const Form: FC = () => {
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setError] = useState(ERRORS_DEFAULT_STATE);
 
-  const [loading, setLoadingOpen] = useState(false);
+  const loading = useSelector<RootState>((state) => state.user.loading);
+  const errorMessage = useSelector<RootState>((state) => state.user.error);
 
   const inputChangeHandle = useCallback((e) => {
     const { target } = e;
@@ -71,23 +74,13 @@ const Form: FC = () => {
         setError((prev) => ({
           ...prev,
           mail: true,
-          footer: true,
-          footerText: 'Некорректная форма email'
+          mailValidate: false
         }));
 
         return;
       }
 
-      setLoadingOpen(true);
-
-      userLoginThunk(navigate, { email: form.email, password: form.password }, () => {
-        setLoadingOpen(false);
-
-        setError((prev) => ({
-          ...prev,
-          footer: true
-        }));
-      });
+      userLoginThunk(navigate, { email: form.email, password: form.password });
     },
     [navigate, form]
   );
@@ -120,7 +113,8 @@ const Form: FC = () => {
           Введите данные!
         </Alert>
       </Snackbar>
-      {errors.footer ? <ErrorText>{errors.footerText}</ErrorText> : null}
+      {errorMessage !== '' ? <ErrorText> {errorMessage}</ErrorText> : null}
+      {!errors.mailValidate ? <ErrorText> Некорректная форма email </ErrorText> : null}
     </RegisterForm>
   );
 };
