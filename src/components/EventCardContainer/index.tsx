@@ -15,15 +15,13 @@ type Props = {
 const PAGE_SIZE = 10;
 
 export const EventCardContainer: FC<Props> = ({ events, children }) => {
-  const notArchivedEvents = events.filter((event) => !event.in_archive);
-
-  const totalPages = Math.ceil(notArchivedEvents.length / PAGE_SIZE);
+  const totalPages = Math.ceil(events.length / PAGE_SIZE);
 
   const [currentPage, setCurrentPage] = useState(0);
 
   let chunked: Array<EventType[]> = [];
   Array.from({ length: PAGE_SIZE }, (val, i) => {
-    chunked.push(notArchivedEvents.slice(i * PAGE_SIZE, i * PAGE_SIZE + PAGE_SIZE));
+    chunked.push(events.slice(i * PAGE_SIZE, i * PAGE_SIZE + PAGE_SIZE));
   });
 
   let filteredChunked = chunked.filter((array) => array && array.length !== 0);

@@ -1,13 +1,16 @@
+import { EventType } from '../../types/Event';
 import {
   SET_EVENTS_SUCCESS_ACTION,
   SET_EVENTS_ERROR_ACTION,
   RootAction,
-  SET_EVENTS_LOADER_ACTION
+  SET_EVENTS_LOADER_ACTION,
+  ARCHIVE_EVENT_SUCCESS_ACTION,
+  CREATE_EVENT_SUCCESS_ACTION
 } from '../actions/eventsActions';
 
 type Events = {
   loading: boolean;
-  data: Object[];
+  data: EventType[];
   error: string;
 };
 
@@ -33,6 +36,17 @@ export function eventsReducer(state = DEFAULT_EVENTS, action: RootAction) {
       return {
         ...state,
         loading: action.payload
+      };
+    // case ARCHIVE_EVENT_SUCCESS_ACTION:
+    //   return {
+    //     ...state,
+    //     data: action.payload
+    //   };
+    case CREATE_EVENT_SUCCESS_ACTION:
+      console.log(action.payload);
+      return {
+        ...state,
+        data: [...state.data, action.payload]
       };
 
     default:

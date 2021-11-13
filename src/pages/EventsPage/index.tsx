@@ -1,10 +1,10 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 
 import { getEventsThunk } from '../../store/thunk';
 
-import { EventsPage } from './styles';
+import { StyledEventsPage } from './styles';
 
 import Sidebar from '../../components/Sidebar';
 import ToolBar from '../../components/Toolbar';
@@ -20,34 +20,49 @@ import ListItemArchive from '../../components/ListItemArchive';
 
 import List from '@mui/material/List/List';
 
-getEventsThunk();
+import CircularIndeterminate from '../../components/CircularIndeterminate';
 
-const Page: FC = () => {
+const EventsPage: FC = () => {
+  const loading = useSelector<RootState>((state) => state.events.loading);
+
+  useEffect(() => {
+    getEventsThunk();
+  }, []);
+
   const events = useSelector<RootState>((state) => state.events.data) as EventType[];
+  const nonArchivedEvents = events.filter((obj) => !obj.in_archive);
 
-  let [shownEvents, setShownEvents] = useState([...events]);
+  const [shownEvents, setShownEvents] = useState([] as EventType[]);
+
+  useEffect(() => {
+    if (events.length > 0) {
+      const initialState = nonArchivedEvents;
+
+      setShownEvents(initialState);
+    }
+  }, [events]);
 
   const onChangeHandle = useCallback(
     (e) => {
       const { target } = e;
 
       if (target.value === '') {
-        setShownEvents((shownEvents) => [...events]);
+        setShownEvents(nonArchivedEvents);
 
         return;
       }
 
-      const filteredValues = events.filter((event) => {
-        return event.name.toLowerCase().indexOf(target.value.toLowerCase()) === 0;
+      const filteredValues = nonArchivedEvents.filter((event) => {
+        return event?.name?.toLowerCase().indexOf(target.value.toLowerCase()) === 0;
       });
 
-      setShownEvents((shownEvents) => [...filteredValues]);
+      setShownEvents([...filteredValues]);
     },
-    [events]
+    [shownEvents]
   );
 
   return (
-    <EventsPage>
+    <StyledEventsPage>
       <Sidebar>
         <List>
           <ListItemEvents active={true}></ListItemEvents>
@@ -58,10 +73,11 @@ const Page: FC = () => {
       <ToolBar>Список мероприятий</ToolBar>
       <Main>
         <SearchField onChange={onChangeHandle} />
+        {loading ? <CircularIndeterminate /> : null}
         <EventCardContainer events={shownEvents}></EventCardContainer>
       </Main>
-    </EventsPage>
+    </StyledEventsPage>
   );
 };
 
-export default Page;
+export default EventsPage;

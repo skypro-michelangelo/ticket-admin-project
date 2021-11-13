@@ -7,12 +7,13 @@ type Props = {
   name?: string;
   error?: boolean;
   type?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input: FC<Props> = ({ name, error, type, onChange, children }) => {
+const Input: FC<Props> = ({ value, name, error, type, onChange, children }) => {
   return (
-    <StyledInput name={name} error={error} type={type} onChange={onChange}>
+    <StyledInput value={value} name={name} error={error} type={type} onChange={onChange}>
       {children}
     </StyledInput>
   );

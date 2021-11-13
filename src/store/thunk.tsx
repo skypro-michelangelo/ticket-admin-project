@@ -1,6 +1,13 @@
 import { NavigateFunction } from 'react-router-dom';
 import { api } from '../api/api';
-import { setEventsError, setEventsLoader, setEventsSuccess } from './actions/eventsActions';
+import { EventType } from '../types/Event';
+import {
+  createEventError,
+  createEventSuccess,
+  setEventsError,
+  setEventsLoader,
+  setEventsSuccess
+} from './actions/eventsActions';
 import { userLoginError, userLoginLoader, userLoginSuccess } from './actions/userActions';
 import { store } from './store';
 
@@ -31,19 +38,75 @@ export function getEventsThunk() {
 
   api
     .getEvents()
-    // .then((response) => {
-    //   if (response.status !== 200) {
-    //     throw new Error();
-    //   }
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error();
+      }
 
-    //   return response.json();
-    // })
+      return response.json();
+    })
     .then((data) => {
+      console.log(data);
+
       store.dispatch(setEventsSuccess(data));
       store.dispatch(setEventsError(''));
     })
     .catch((error) => {
       store.dispatch(setEventsError('Мероприятий не найдено.'));
+    })
+    .finally(() => {
+      store.dispatch(setEventsLoader(false));
+    });
+}
+
+export function archiveEventThunk(id: string) {
+  store.dispatch(setEventsLoader(true));
+
+  api
+    .archiveEvent(id)
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error();
+      }
+
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+
+      // store.dispatch(setEventsSuccess(data));
+      // store.dispatch(setEventsError(''));
+    })
+    .catch((error) => {
+      //store.dispatch(setEventsError('Не удалось архивировать.'));
+    })
+    .finally(() => {
+      store.dispatch(setEventsLoader(false));
+    });
+}
+
+export function createEventThunk(navigate: NavigateFunction, data: FormData) {
+  store.dispatch(setEventsLoader(true));
+
+  api
+    .createEvent(data)
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error();
+      }
+
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+
+      store.dispatch(createEventSuccess(data));
+      store.dispatch(createEventError(''));
+
+      navigate('/');
+    })
+    .catch((error) => {
+      store.dispatch(createEventError('Не удалось создать мероприятие.'));
     })
     .finally(() => {
       store.dispatch(setEventsLoader(false));
