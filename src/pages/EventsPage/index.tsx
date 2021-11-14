@@ -33,11 +33,10 @@ const EventsPage: FC = () => {
 
   useEffect(() => {
     if (shownEvents.length === 0) {
-      const initialState = nonArchivedEvents;
-
-      setShownEvents(initialState);
+      setShownEvents(nonArchivedEvents);
     }
-  }, [shownEvents.length, nonArchivedEvents]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChangeHandle = useCallback(
     (e) => {
