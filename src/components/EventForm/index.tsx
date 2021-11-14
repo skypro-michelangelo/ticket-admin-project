@@ -1,22 +1,17 @@
 import React from 'react';
 import { FC, useCallback, useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 import { createEventThunk } from '../../store/thunk';
 
-import EventForm from './styles';
-
 import InputText from '../../primitives/InputText';
 import Input from '../../primitives/Input';
-import TextField from '@mui/material/TextField';
-
 import Button from '../../primitives/Button';
 
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-
+import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import EventForm from './styles';
+
 import { EventType } from '../../types/Event';
 
 const EMPTY_FORM: EventType = {

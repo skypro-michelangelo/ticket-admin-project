@@ -10,7 +10,7 @@ export const StyledEventForm = styled.form`
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #bcbcbc;
-  margin: auto;
+  margin: 8px auto;
 `;
 
 export default StyledEventForm;

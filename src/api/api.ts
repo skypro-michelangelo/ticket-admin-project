@@ -1,6 +1,4 @@
-import { EventType } from '../types/Event';
-
-const backendDomain = 'http://localhost:5000';
+const backendDomain = process.env.REACT_APP_BACKEND_URL;
 
 export const api = {
   getUser: async function (user: { email: string; password: string }) {
@@ -12,8 +10,7 @@ export const api = {
       })
     };
 
-    const response = await fetch(`${backendDomain}/login`, options);
-    setTimeout(() => {}, 10000);
+    const response = await fetch(`${backendDomain}/signIn`, options);
 
     return response;
   },
@@ -25,8 +22,6 @@ export const api = {
 
     const response = await fetch(`${backendDomain}/events?count=0&offset=0`, options);
 
-    setTimeout(() => {}, 10000);
-
     return response;
   },
 
@@ -37,13 +32,10 @@ export const api = {
 
     const response = await fetch(`${backendDomain}/events/${id}/archive`, options);
 
-    setTimeout(() => {}, 10000);
-    console.log(response);
     return response;
   },
 
   createEvent: async function (data: FormData) {
-    console.log(data);
     const options = {
       method: 'POST',
       enctype: 'multipart/form-data',
@@ -52,25 +44,18 @@ export const api = {
 
     const response = await fetch(`${backendDomain}/events/create`, options);
 
-    console.log(response);
-
-    setTimeout(() => {}, 10000);
     return response;
   },
 
-  updateEvent: async function (event: EventType) {
-    console.log(event);
+  updateEvent: async function (data: FormData, id: string) {
     const options = {
-      method: 'POST',
+      method: 'PUT',
       enctype: 'multipart/form-data',
-      body: JSON.stringify(event)
+      body: data
     };
 
-    const response = await fetch(`${backendDomain}/events/create`, options);
+    const response = await fetch(`${backendDomain}/events/${id}/update`, options);
 
-    console.log(response);
-
-    setTimeout(() => {}, 10000);
     return response;
   }
 };

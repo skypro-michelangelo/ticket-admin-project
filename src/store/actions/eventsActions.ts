@@ -11,6 +11,9 @@ export const ARCHIVE_EVENT_ERROR_ACTION = 'EVENTS@ARCHIVE_ERROR' as const;
 export const CREATE_EVENT_SUCCESS_ACTION = 'EVENTS@CREATE_SUCCESS' as const;
 export const CREATE_EVENT_ERROR_ACTION = 'EVENTS@CREATE_ERROR' as const;
 
+export const UPDATE_EVENT_SUCCESS_ACTION = 'EVENTS@UPDATE_SUCCESS' as const;
+export const UPDATE_EVENT_ERROR_ACTION = 'EVENTS@UPDATE_ERROR' as const;
+
 export function setEvents(events: EventType[]) {
   return {
     type: SET_EVENTS_ACTION,
@@ -39,6 +42,13 @@ export function setEventsLoader(loading: boolean) {
   };
 }
 
+export function archiveEventError(error: string) {
+  return {
+    type: ARCHIVE_EVENT_ERROR_ACTION,
+    payload: error
+  };
+}
+
 export function archiveEventSuccess(event: EventType) {
   return {
     type: ARCHIVE_EVENT_SUCCESS_ACTION,
@@ -60,15 +70,33 @@ export function createEventError(error: string) {
   };
 }
 
+export function updateEventSuccess(event: EventType) {
+  return {
+    type: UPDATE_EVENT_SUCCESS_ACTION,
+    payload: event
+  };
+}
+
+export function updateEventError(error: string) {
+  return {
+    type: UPDATE_EVENT_ERROR_ACTION,
+    payload: error
+  };
+}
+
 export type setEventsActionType = ReturnType<typeof setEvents>;
 export type setEventsSuccessActionType = ReturnType<typeof setEventsSuccess>;
 export type setEventsErrorActionType = ReturnType<typeof setEventsError>;
 export type setEventsLoaderActionType = ReturnType<typeof setEventsLoader>;
 
 export type archiveEventSuccessActionType = ReturnType<typeof archiveEventSuccess>;
+export type archiveEventErrorActionType = ReturnType<typeof archiveEventError>;
 
 export type createEventSuccessActionType = ReturnType<typeof createEventSuccess>;
 export type createEventErrorActionType = ReturnType<typeof createEventError>;
+
+export type updateEventSuccessActionType = ReturnType<typeof updateEventSuccess>;
+export type updateEventErrorActionType = ReturnType<typeof updateEventError>;
 
 export type RootAction =
   | setEventsActionType
@@ -76,5 +104,8 @@ export type RootAction =
   | setEventsErrorActionType
   | setEventsLoaderActionType
   | archiveEventSuccessActionType
+  | archiveEventErrorActionType
   | createEventSuccessActionType
-  | createEventErrorActionType;
+  | createEventErrorActionType
+  | updateEventSuccessActionType
+  | updateEventErrorActionType;

@@ -33,6 +33,7 @@ const EventCard: FC<Props> = ({ event }) => {
   };
 
   const handleOpenModal = () => {
+    setAnchorEl(null);
     setOpenModal(true);
   };
 
@@ -49,7 +50,13 @@ const EventCard: FC<Props> = ({ event }) => {
   const id = open ? 'simple-popover' : undefined;
 
   return (
-    <Card sx={{ width: 280, height: 250, margin: '0px 20px 15px 0px' }}>
+    <Card
+      sx={{
+        width: 280,
+        height: 250,
+        margin: '0px 20px 15px 0px'
+      }}
+    >
       <CardHeader
         action={
           <IconButton aria-label="settings" onClick={handleClick}>
@@ -58,6 +65,7 @@ const EventCard: FC<Props> = ({ event }) => {
         }
         title={event.name}
         subheader={event.date_time}
+        sx={{ wordBreak: 'break-all' }}
       />
       <Popover
         id={id}

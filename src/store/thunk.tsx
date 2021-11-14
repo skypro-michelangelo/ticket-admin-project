@@ -1,12 +1,15 @@
 import { NavigateFunction } from 'react-router-dom';
 import { api } from '../api/api';
-import { EventType } from '../types/Event';
 import {
+  archiveEventError,
+  archiveEventSuccess,
   createEventError,
   createEventSuccess,
   setEventsError,
   setEventsLoader,
-  setEventsSuccess
+  setEventsSuccess,
+  updateEventError,
+  updateEventSuccess
 } from './actions/eventsActions';
 import { userLoginError, userLoginLoader, userLoginSuccess } from './actions/userActions';
 import { store } from './store';
@@ -74,11 +77,11 @@ export function archiveEventThunk(id: string) {
     .then((data) => {
       console.log(data);
 
-      // store.dispatch(setEventsSuccess(data));
-      // store.dispatch(setEventsError(''));
+      store.dispatch(archiveEventSuccess(data));
+      store.dispatch(archiveEventError(''));
     })
     .catch((error) => {
-      //store.dispatch(setEventsError('Не удалось архивировать.'));
+      store.dispatch(setEventsError('Не удалось архивировать.'));
     })
     .finally(() => {
       store.dispatch(setEventsLoader(false));
@@ -91,15 +94,13 @@ export function createEventThunk(navigate: NavigateFunction, data: FormData) {
   api
     .createEvent(data)
     .then((response) => {
-      if (response.status !== 200) {
+      if (response.status !== 200 && response.status !== 201) {
         throw new Error();
       }
 
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-
       store.dispatch(createEventSuccess(data));
       store.dispatch(createEventError(''));
 
@@ -107,6 +108,30 @@ export function createEventThunk(navigate: NavigateFunction, data: FormData) {
     })
     .catch((error) => {
       store.dispatch(createEventError('Не удалось создать мероприятие.'));
+    })
+    .finally(() => {
+      store.dispatch(setEventsLoader(false));
+    });
+}
+
+export function updateEventThunk(data: FormData, id: string) {
+  store.dispatch(setEventsLoader(true));
+
+  api
+    .updateEvent(data, id)
+    .then((response) => {
+      if (response.status !== 200 && response.status !== 201) {
+        throw new Error();
+      }
+
+      return response.json();
+    })
+    .then((data) => {
+      store.dispatch(updateEventSuccess(data));
+      store.dispatch(updateEventError(''));
+    })
+    .catch((error) => {
+      store.dispatch(updateEventError('Не удалось обновить мероприятие.'));
     })
     .finally(() => {
       store.dispatch(setEventsLoader(false));

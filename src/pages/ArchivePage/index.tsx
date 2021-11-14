@@ -30,12 +30,12 @@ const ArchivePage: FC = () => {
   const [shownEvents, setShownEvents] = useState([] as EventType[]);
 
   useEffect(() => {
-    if (events.length > 0) {
+    if (shownEvents.length === 0) {
       const initialState = archivedEvents;
 
       setShownEvents(initialState);
     }
-  }, [events]);
+  }, [shownEvents.length, archivedEvents]);
 
   const onChangeHandle = useCallback(
     (e) => {
@@ -53,7 +53,7 @@ const ArchivePage: FC = () => {
 
       setShownEvents([...filteredValues]);
     },
-    [shownEvents]
+    [archivedEvents]
   );
 
   return (
