@@ -10,7 +10,7 @@ export const api = {
       })
     };
 
-    const response = await fetch(`${backendDomain}/auth/signIn`, options);
+    const response = await fetch(`${backendDomain}auth/signIn`, options);
 
     return response;
   },
@@ -20,7 +20,7 @@ export const api = {
       method: 'GET'
     };
 
-    const response = await fetch(`${backendDomain}/events?count=0&offset=0`, options);
+    const response = await fetch(`${backendDomain}events?count=0&offset=0`, options);
 
     return response;
   },
@@ -30,7 +30,7 @@ export const api = {
       method: 'PUT'
     };
 
-    const response = await fetch(`${backendDomain}/events/${id}/archive`, options);
+    const response = await fetch(`${backendDomain}events/${id}/archive`, options);
 
     return response;
   },
@@ -42,7 +42,7 @@ export const api = {
       body: data
     };
 
-    const response = await fetch(`${backendDomain}/events/create`, options);
+    const response = await fetch(`${backendDomain}events/create`, options);
 
     return response;
   },
@@ -54,7 +54,7 @@ export const api = {
       body: data
     };
 
-    const response = await fetch(`${backendDomain}/events/${id}/update`, options);
+    const response = await fetch(`${backendDomain}events/${id}/update`, options);
 
     return response;
   }
