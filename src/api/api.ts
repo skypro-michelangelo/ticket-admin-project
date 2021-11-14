@@ -10,7 +10,7 @@ export const api = {
       })
     };
 
-    const response = await fetch(`${backendDomain}/signIn`, options);
+    const response = await fetch(`${backendDomain}/auth/signIn`, options);
 
     return response;
   },
