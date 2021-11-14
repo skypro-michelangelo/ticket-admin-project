@@ -26,7 +26,6 @@ const EventsPage: FC = () => {
   }, []);
 
   const events = useSelector<RootState>((state) => state.events.data) as EventType[];
-  console.log(events);
   const nonArchivedEvents = events.filter((obj) => !obj.in_archive);
 
   const [shownEvents, setShownEvents] = useState(nonArchivedEvents);
