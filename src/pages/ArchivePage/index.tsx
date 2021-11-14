@@ -31,11 +31,10 @@ const ArchivePage: FC = () => {
 
   useEffect(() => {
     if (shownEvents.length === 0) {
-      const initialState = archivedEvents;
-
-      setShownEvents(initialState);
+      setShownEvents(archivedEvents);
     }
-  }, [shownEvents.length, archivedEvents]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChangeHandle = useCallback(
     (e) => {
